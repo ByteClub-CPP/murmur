@@ -10,7 +10,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # Serve a message at the root path so it doesn't 404
 @app.get("/")
 async def root():
-    return {"message": "Welcome to the Murur API 💜"}
+    return {"message": "Welcome to the Murmur API 💜"}
 
 # Redirect /favicon.ico to the actual static location
 @app.get("/favicon.ico")
