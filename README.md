@@ -73,3 +73,20 @@ uvicorn main:app --reload
 ```
 
 ---
+
+## 🗂️ Data & State Management
+
+### 🔹 Base Context (User-specific)
+During onboarding, each user submits a `baseContext` that is stored in Firestore at:
+
+This includes: `/users/{userId}/baseContext`
+
+```json
+{
+  "childAgeRange": "4–6",
+  "diagnoses": ["autism"],
+  "communicationStyle": "non-verbal",
+  "language": "English (US)"
+}
+
+
