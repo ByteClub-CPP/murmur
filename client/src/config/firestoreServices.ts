@@ -1,5 +1,5 @@
 import { collection, doc, getDoc, getDocs, setDoc, deleteDoc } from "firebase/firestore";
-import db from "./firebaseconfig"; // Import Firestore instance
+import db from "../config/firebaseConfig"; // Import Firestore instance
 
 // Add a new caregiver profile
 export const addCaregiverProfile = async (data: {

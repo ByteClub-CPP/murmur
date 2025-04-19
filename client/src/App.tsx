@@ -4,6 +4,7 @@ import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { AuthStatus } from './components/AuthStatus';
+import { LogoutButton } from './components/LogoutButton';
 import { useEffect, useState } from 'react';
 import { addCaregiverProfile, getCaregiverProfiles, updateCaregiverProfile, deleteCaregiverProfile } from './config/firestoreServices';
 
@@ -87,6 +88,11 @@ function App() {
             element={
               <ProtectedRoute>
                 <div className="p-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <AuthStatus />
+                    <LogoutButton />
+                  </div>
+                  {/* Your other dashboard content */}
                   <AuthStatus />
                   <h1>Firestore CRUD Operations</h1>
                   <button onClick={handleAdd}>Add Caregiver Profile</button>
