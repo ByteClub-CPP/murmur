@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../config/firebase';  // Fix: Updated import path
+import { auth } from '../config/firebase';
 import { useNavigate } from 'react-router-dom';
 
 export const SignIn = () => {
