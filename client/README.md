@@ -52,3 +52,49 @@ export default tseslint.config({
   },
 })
 ```
+
+## Authentication Setup
+
+### Prerequisites
+- Node.js and npm installed
+- Firebase project access (contact team lead for access)
+
+### Environment Setup
+1. Create a `.env` file in the client directory:
+```bash
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
+```
+
+### Installation
+```bash
+cd client
+npm install
+```
+
+### Available Authentication Features
+- Email/Password Sign Up
+- Email/Password Sign In
+- Protected Routes
+- Automatic Sign Out
+- Manual Sign Out
+- Authentication State Management
+
+### Usage Examples
+```typescript
+// Protected Route
+<ProtectedRoute>
+  <YourComponent />
+</ProtectedRoute>
+
+// Access Auth Context
+const { user } = useAuthContext();
+
+// Sign Out
+<LogoutButton />
+```

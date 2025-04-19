@@ -12,6 +12,16 @@ def test_generate_response():
         ]
     }
 
+    # Simulating mock user context based on the new schema
+    user_context = {
+        "caregiver_name": "Alex",
+        "child_name": "Sam",
+        "child_age_range": "4–6",
+        "diagnoses": ["autism"],
+        "communication_style": "non-verbal",
+        "language": "English (US)"
+    }
+
     response = client.post("/generate-response", json=payload)
     
     # Debug output
@@ -25,12 +35,20 @@ def test_generate_response():
     print("✅ /generate-response test passed")
     print(data)
 
-
-
 def test_followup_response():
     payload = {
         "user_id": "mockUser123",
         "followup_input": "Try using a visual schedule next time"
+    }
+
+    # Simulating mock user context based on the new schema
+    user_context = {
+        "caregiver_name": "Alex",
+        "child_name": "Sam",
+        "child_age_range": "4–6",
+        "diagnoses": ["autism"],
+        "communication_style": "non-verbal",
+        "language": "English (US)"
     }
 
     response = client.post("/followup-response", json=payload)
@@ -48,4 +66,3 @@ def test_followup_response():
 if __name__ == "__main__":
     test_generate_response()
     test_followup_response()
-    
