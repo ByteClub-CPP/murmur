@@ -34,3 +34,11 @@ Murmur aims to improve caregiver-child communication by:
 - **Realtime updates** via Firestore for chat-style loop (if used)
 
 ---
+
+## 💻 To Run Client
+- **npm run dev**
+
+## 🛜 To Run Server
+- **uvicorn main:app --reload**
+
+---
