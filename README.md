@@ -83,6 +83,8 @@ This includes: `/users/{userId}/baseContext`
 
 ```json
 {
+  "caregiverName": "Alex",
+  "childName": "Sam",
   "childAgeRange": "4–6",
   "diagnoses": ["autism"],
   "communicationStyle": "non-verbal",
