@@ -4,6 +4,7 @@ import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { AuthStatus } from './components/AuthStatus';
+import { LogoutButton } from './components/LogoutButton';
 
 function App() {
   return (
@@ -19,8 +20,11 @@ function App() {
             element={
               <ProtectedRoute>
                 <div className="p-4">
-                  <AuthStatus />
-                  {/* Your protected content here */}
+                  <div className="flex justify-between items-center mb-4">
+                    <AuthStatus />
+                    <LogoutButton />
+                  </div>
+                  {/* Your other dashboard content */}
                 </div>
               </ProtectedRoute>
             }
