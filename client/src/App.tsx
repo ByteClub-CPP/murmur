@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import { OnboardingView } from './components/OnboardingView'
 import { ObservationSelectionView } from './components/ObservationSelectionView'
 import { FollowUpContextView } from './components/FollowUpContextView'
@@ -70,8 +69,8 @@ function App() {
 
   // Render the appropriate view based on current stage
   return (
-    <div className="bg-[#FAF7F2] min-h-screen text-[#2F2F2F]">
-      <div className="max-w-md mx-auto p-4">
+    <div className="bg-[#FAF7F2] min-h-screen text-[#2F2F2F] py-8">
+      <div className="max-w-md mx-auto p-6">
         {stage === 'onboarding' && (
           <OnboardingView 
             baseContext={baseContext} 
@@ -91,9 +90,9 @@ function App() {
         {stage === 'followUp' && (
           <FollowUpContextView
             rootObservation={selectedObservations[0]}
-            onSelect={(observation) => {
-              selectObservation(observation)
-              generateResponse()
+            onSelect={(observation: string) => {
+              selectObservation(observation);
+              generateResponse();
             }}
           />
         )}
