@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { User, onAuthStateChanged } from 'firebase/auth';
+import { User, onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import { AuthContext } from './AuthContext';
 
@@ -25,8 +25,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
     );
 
-    // Cleanup subscription on unmount
-    return () => unsubscribe();
+    // Add window unload listener
+    const handleUnload = () => {
+      signOut(auth).catch(console.error);
+    };
+    window.addEventListener('unload', handleUnload);
+
+    // Cleanup subscription and unload listener on unmount
+    return () => {
+      unsubscribe();
+      window.removeEventListener('unload', handleUnload);
+    };
   }, []);
 
   return (

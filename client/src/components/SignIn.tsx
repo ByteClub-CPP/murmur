@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebase';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ export const SignIn = () => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     }
@@ -41,10 +41,23 @@ export const SignIn = () => {
             className="w-full px-3 py-2 border rounded-md"
             required
           />
-          <button type="submit" className="w-full py-2 px-4 bg-blue-600 text-white rounded-md">
-            Sign In
-          </button>
+          <div className="flex items-center justify-between">
+            <button
+              type="submit"
+              className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              Sign In
+            </button>
+          </div>
         </form>
+        <div className="mt-4 text-center">
+          <p className="text-gray-600">
+            Don't have an account?{' '}
+            <Link to="/signup" className="text-blue-600 hover:text-blue-800">
+              Sign Up
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
