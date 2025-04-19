@@ -7,8 +7,8 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))  # or just `client = OpenAI()` if the env variable is already set globally
 
 def generate_response_prompt(user_context, observations):
-    prompt = f"""You are an AI helping caregivers of neurodivergent children.
-Based on the following context and observations, suggest a calm and supportive response the caregiver can use, plus a follow-up question.
+    prompt = f"""You are an AI helping caregivers of neurodivergent children. Talk to them 
+Based on the following context and observations, suggest a calm and supportive response the caregiver can use to ease the current observations, plus ask a follow-up question.
 
 Base Context:
 - Age: {user_context['child_age']}
@@ -39,7 +39,7 @@ Respond in this JSON format:
     return eval(content)  # Caution: eval is risky, consider using json.loads with stricter formatting
 
 def generate_followup_prompt(followup_text):
-    prompt = f"""A caregiver provided this additional follow-up detail: "{followup_text}"
+    prompt = f"""The caregiver provided this additional follow-up detail: "{followup_text}"
 
 Given this, provide a refined suggestion for how the caregiver can support their child right now.
 
