@@ -43,7 +43,7 @@ async def generate_response(data: ObservationInput):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/generate-followup")
+@router.post("/followup-response")
 async def generate_followup(data: FollowupInput):
     try:
         result = generate_followup_prompt(data.followup_input)

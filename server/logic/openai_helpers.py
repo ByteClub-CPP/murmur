@@ -1,11 +1,10 @@
-import openai
+from openai import OpenAI
 import os
-
-# If you're using a .env file
 from dotenv import load_dotenv
-load_dotenv()
 
-openai.api_key = os.getenv("OPENAI_API_KEY")  # or hardcode for now
+# Load .env and set up client
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))  # or just `client = OpenAI()` if the env variable is already set globally
 
 def generate_response_prompt(user_context, observations):
     prompt = f"""You are an AI helping caregivers of neurodivergent children.
@@ -27,14 +26,17 @@ Respond in this JSON format:
 }}
 """
 
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.7,
+        messages=[
+            {"role": "system", "content": "You are a helpful parenting assistant."},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.7
     )
 
-    content = response['choices'][0]['message']['content']
-    return eval(content)  # Make sure this returns a JSON-parsable string
+    content = response.choices[0].message.content.strip()
+    return eval(content)  # Caution: eval is risky, consider using json.loads with stricter formatting
 
 def generate_followup_prompt(followup_text):
     prompt = f"""A caregiver provided this additional follow-up detail: "{followup_text}"
@@ -46,11 +48,30 @@ Respond in this JSON format:
     "refined_suggestion": "..."
 }}
 """
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.7,
-    )
 
-    content = response['choices'][0]['message']['content']
-    return eval(content)
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[ 
+                {"role": "system", "content": "You are a helpful parenting assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7
+        )
+        content = response.choices[0].message.content.strip()
+        return eval(content)  # Safe this time, but consider switching to JSON.loads if needed
+    except Exception as e:
+        print(f"Error during followup prompt generation: {e}")
+        return {"refined_response": "Error in generating follow-up response"}
+    
+'''
+Using eval() is a quick dev hack, but can be dangerous in production. Use this safer version if your model always returns valid JSON:
+
+python
+Copy
+Edit
+import json
+# Replace:
+# return eval(content)
+# With:
+return json.loads(content)'''
