@@ -1,3 +1,5 @@
+import calmImage from '../assets/calm.jpg';
+
 interface ObservationSelectionViewProps {
   onSelect: (observation: string) => void;
 }
@@ -14,9 +16,15 @@ const rootObservations = [
 
 export function ObservationSelectionView({ onSelect }: ObservationSelectionViewProps) {
   return (
-    <div className="bg-[#FAF7F2] min-h-screen text-[#2F2F2F] py-8">
-      <div className="max-w-md mx-auto p-6">
-        <div className="space-y-8">
+    <div className="relative min-h-screen w-full overflow-hidden">
+      <img
+        src={calmImage}
+        alt="Calm background"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      />
+
+      <div className="relative z-10 flex justify-center items-center min-h-screen px-4">
+        <div className="w-full max-w-md bg-[#FAF7F2]/90 backdrop-blur-md p-6 rounded-2xl shadow-xl space-y-8">
           <h2 className="text-2xl font-semibold text-center">👁️ What are you noticing right now?</h2>
           <p className="text-[#7D7C77] text-center">Select the behavior you're observing:</p>
           <div className="space-y-4">
@@ -29,9 +37,6 @@ export function ObservationSelectionView({ onSelect }: ObservationSelectionViewP
                 {observation}
               </button>
             ))}
-          </div>
-          <div className="bg-red-500 text-white p-4 rounded-lg">
-            Tailwind is working!
           </div>
         </div>
       </div>

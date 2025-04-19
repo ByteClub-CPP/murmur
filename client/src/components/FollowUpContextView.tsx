@@ -1,9 +1,10 @@
+import calmImage from '../assets/calm.jpg';
+
 interface FollowUpContextViewProps {
   rootObservation: string
   onSelect: (observation: string) => void
 }
 
-// Mock data for follow-ups based on root observation
 const followUpMap: Record<string, string[]> = {
   "They are covering their ears": [
     "There is loud noise in the environment",
@@ -50,28 +51,46 @@ const followUpMap: Record<string, string[]> = {
 }
 
 export function FollowUpContextView({ rootObservation, onSelect }: FollowUpContextViewProps) {
-  // Get follow-up options for the selected root observation
   const followUps = followUpMap[rootObservation] || []
-  
+
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-semibold mb-2">🔍 What else do you notice?</h2>
-      <p className="text-[#7D7C77] text-sm mb-3">You noticed:</p>
-      <div className="bg-white border border-[#DAD7D0] rounded-xl p-3 shadow-sm mb-4">
-        {rootObservation}
-      </div>
-      
-      <p className="text-[#7D7C77] text-sm mb-2">Choose one of these:</p>
-      <div className="space-y-3">
-        {followUps.map((observation) => (
-          <button
-            key={observation}
-            className="w-full bg-white border border-[#DAD7D0] rounded-xl p-4 shadow-sm hover:bg-[#F5EFE6] transition-all text-left"
-            onClick={() => onSelect(observation)}
-          >
-            {observation}
-          </button>
-        ))}
+    <div className="relative min-h-screen w-full overflow-hidden">
+      <img
+        src={calmImage}
+        alt="Calm background"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      />
+
+      <div className="relative z-10 flex justify-center items-center min-h-screen px-4">
+        <div className="w-full max-w-md bg-[#FAF7F2]/90 backdrop-blur-md p-6 rounded-2xl shadow-xl space-y-5">
+          <h2 className="text-2xl font-bold text-center text-[#444]">
+            🔍 What else do you notice?
+          </h2>
+
+          <p className="text-[#7D7C77] text-sm text-center">
+            You noticed:
+          </p>
+
+          <div className="bg-white border border-[#DAD7D0] rounded-xl p-4 shadow-sm text-center text-[#333] font-medium">
+            {rootObservation}
+          </div>
+
+          <p className="text-[#7D7C77] text-sm text-center">
+            Choose one of these:
+          </p>
+
+          <div className="space-y-3">
+            {followUps.map((observation) => (
+              <button
+                key={observation}
+                className="w-full text-left bg-white border border-[#DAD7D0] rounded-xl p-4 shadow-sm hover:bg-[#F5EFE6] transition-all"
+                onClick={() => onSelect(observation)}
+              >
+                {observation}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )
