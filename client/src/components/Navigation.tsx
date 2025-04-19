@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../auth/AuthContext';
 import { signOut } from 'firebase/auth';
-import { auth } from '../config/firebase';
+import { auth } from '../../config/firebase';
 
 export const Navigation = () => {
   const { user } = useAuthContext();
